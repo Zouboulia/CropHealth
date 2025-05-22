@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartCrop", "SmartCrop\SmartCrop.csproj", "{87E4F9D1-6514-4E8A-88C8-520466EEB212}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartCrop.Client", "SmartCrop.Client\SmartCrop.Client.csproj", "{95CFB139-B0D2-4EAB-9009-5E144A1EAD80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smartcrop.Shared", "Smartcrop.Shared\Smartcrop.Shared.csproj", "{9E1D57C2-E06B-4134-B0D6-0A1B1ECA0F6F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87E4F9D1-6514-4E8A-88C8-520466EEB212}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87E4F9D1-6514-4E8A-88C8-520466EEB212}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87E4F9D1-6514-4E8A-88C8-520466EEB212}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87E4F9D1-6514-4E8A-88C8-520466EEB212}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95CFB139-B0D2-4EAB-9009-5E144A1EAD80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95CFB139-B0D2-4EAB-9009-5E144A1EAD80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95CFB139-B0D2-4EAB-9009-5E144A1EAD80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95CFB139-B0D2-4EAB-9009-5E144A1EAD80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E1D57C2-E06B-4134-B0D6-0A1B1ECA0F6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E1D57C2-E06B-4134-B0D6-0A1B1ECA0F6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E1D57C2-E06B-4134-B0D6-0A1B1ECA0F6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E1D57C2-E06B-4134-B0D6-0A1B1ECA0F6F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

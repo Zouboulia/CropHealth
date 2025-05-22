@@ -1,0 +1,25 @@
+# Build
+bin/
+obj/
+packages/
+*.db
+
+# Rider files
+.idea/
+*.sln.iml
+riderModule.iml
+_ReSharper.Caches/
+.idea_modules/
+
+# User files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Log files
+*.log
+
+# Dotnet stuff
+.vscode/
+.env

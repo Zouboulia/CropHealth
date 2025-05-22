@@ -1,0 +1,63 @@
+@rendermode InteractiveWebAssembly
+@page "/recommendations"
+@using SmartCrop.Shared.Models
+@inject HttpClient Http
+
+<h3>Crop Recommendations</h3>
+
+<input type="text" @bind="city" @bind:event="oninput" placeholder="Enter your city" @onkeydown="HandleKeyDown" />
+<button @onclick="GetRecommendationsAsync">Get Recommendations</button>
+
+@if (recommendations == null)
+{
+    <p>Enter your city and click the button above to get crop recommendations.</p>
+}
+else if (recommendations.Count == 0)
+{
+    <p>No recommendations available for <strong>@city</strong>.</p>
+}
+else
+{
+    <h4>Results for <strong>@city</strong></h4>
+    <ul>
+        @foreach (var rec in recommendations)
+        {
+            <li>
+                <strong>@rec.RecommendationText</strong><br />
+                Priority: @rec.Priority<br />
+                Date: @rec.DateIssued.ToShortDateString()<br />
+                @if (!string.IsNullOrEmpty(rec.WeatherSummary))
+                {
+                    <em>Weather: @rec.WeatherSummary</em>
+                }
+            </li>
+        }
+    </ul>
+}
+
+@code {
+    private string city = string.Empty;
+    private List<Recommendation> recommendations;
+
+    private async Task GetRecommendationsAsync()
+    {
+        try
+        {
+            recommendations = await Http.GetFromJsonAsync<List<Recommendation>>(
+                $"http://localhost:5204/api/recommendation/crop/1?city={city}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error fetching data: " + ex.Message);
+            recommendations = new List<Recommendation>();
+        }
+    }
+
+    private async Task HandleKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            await GetRecommendationsAsync();
+        }
+    }
+}
