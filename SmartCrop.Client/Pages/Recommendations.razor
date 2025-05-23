@@ -1,16 +1,19 @@
-@rendermode InteractiveWebAssembly
 @page "/recommendations"
-@using SmartCrop.Shared.Models
 @inject HttpClient Http
+@rendermode InteractiveWebAssembly
 
 <h3>Crop Recommendations</h3>
 
-<input type="text" @bind="city" @bind:event="oninput" placeholder="Enter your city" @onkeydown="HandleKeyDown" />
+<input type="text" @bind="city" @bind:event="oninput" placeholder="Enter a city where your crops are located (e.g., Dublin)" />
 <button @onclick="GetRecommendationsAsync">Get Recommendations</button>
 
-@if (recommendations == null)
+@if (isLoading)
 {
-    <p>Enter your city and click the button above to get crop recommendations.</p>
+    <p>Loading...</p>
+}
+else if (recommendations == null)
+{
+    <p>Enter a city to get recommendations.</p>
 }
 else if (recommendations.Count == 0)
 {
@@ -18,15 +21,16 @@ else if (recommendations.Count == 0)
 }
 else
 {
-    <h4>Results for <strong>@city</strong></h4>
+    <p>Showing recommendations for <strong>@city</strong>:</p>
     <ul>
         @foreach (var rec in recommendations)
         {
             <li>
                 <strong>@rec.RecommendationText</strong><br />
+                Crop ID: @rec.CropId<br />
                 Priority: @rec.Priority<br />
                 Date: @rec.DateIssued.ToShortDateString()<br />
-                @if (!string.IsNullOrEmpty(rec.WeatherSummary))
+                @if (!string.IsNullOrWhiteSpace(rec.WeatherSummary))
                 {
                     <em>Weather: @rec.WeatherSummary</em>
                 }
@@ -37,27 +41,37 @@ else
 
 @code {
     private string city = string.Empty;
-    private List<Recommendation> recommendations;
+    private List<Recommendation>? recommendations;
+    private bool isLoading = false;
 
     private async Task GetRecommendationsAsync()
     {
+        if (string.IsNullOrWhiteSpace(city))
+            return;
+
+        isLoading = true;
+
         try
         {
-            recommendations = await Http.GetFromJsonAsync<List<Recommendation>>(
-                $"http://localhost:5204/api/recommendation/crop/1?city={city}");
+            var url = $"http://localhost:5204/api/recommendation/crop?city={city}";
+            recommendations = await Http.GetFromJsonAsync<List<Recommendation>>(url);
         }
         catch (Exception ex)
         {
-            Console.WriteLine("Error fetching data: " + ex.Message);
+            Console.WriteLine("Error fetching recommendations: " + ex.Message);
             recommendations = new List<Recommendation>();
         }
+
+        isLoading = false;
     }
 
-    private async Task HandleKeyDown(KeyboardEventArgs e)
+    public class Recommendation
     {
-        if (e.Key == "Enter")
-        {
-            await GetRecommendationsAsync();
-        }
+        public int RecommendationId { get; set; }
+        public int CropId { get; set; }
+        public string RecommendationText { get; set; }
+        public DateTime DateIssued { get; set; }
+        public string Priority { get; set; }
+        public string? WeatherSummary { get; set; }
     }
 }

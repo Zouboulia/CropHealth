@@ -1,0 +1,89 @@
+﻿@page "/dataentry"
+@inject HttpClient Http
+@rendermode InteractiveWebAssembly
+
+<h3>Manual Crop Data Entry</h3>
+
+<EditForm Model="entryModel" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div>
+        <label>Field Location:</label>
+        <InputText @bind-Value="entryModel.FieldLocation" class="form-control" placeholder="please enter a city" />
+    </div>
+
+    <div>
+        <label>Soil Type:</label>
+        <InputText @bind-Value="entryModel.SoilType" class="form-control" placeholder="please enter soil type: chalky, clay, loamy, peaty, sandy, silty"/>
+    </div>
+
+    <div>
+        <label>Crop Name:</label>
+        <InputText @bind-Value="entryModel.CropName" class="form-control" placeholder="please enter crop name such as Crop A, crop B, crop  etc.."/>
+    </div>
+
+    <div>
+        <label>Crop Variety:</label>
+        <InputText @bind-Value="entryModel.CropVariety" class="form-control" placeholder="please enter crop variety such as cerials, vegetables etc "/>
+    </div>
+
+    <div>
+        <label>Soil Moisture:</label>
+        <InputText @bind-Value="entryModel.SoilMoisture" class="form-control" placeholder=" Normal soil moisture levels generally range from 20% to 60% for most crops"/>
+    </div>
+
+    <div>
+        <label>Soil pH:</label>
+        <InputText @bind-Value="entryModel.SoilpH" class="form-control" placeholder="Most soils have pH values between 3.5 and 10" />
+    </div>
+
+    <div>
+        <label>Soil Organic Matter:</label>
+        <InputText @bind-Value="entryModel.SoilOrganicMatter" class="form-control" placeholder="The concentration of SOM in soils generally ranges from 1% to 6%" />
+    </div>
+
+    <button type="submit">Submit</button>
+</EditForm>
+
+@if (!string.IsNullOrEmpty(statusMessage))
+{
+    <p>@statusMessage</p>
+}
+
+@code {
+    private EntryModel entryModel = new();
+    private string statusMessage;
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            var response = await Http.PostAsJsonAsync("http://localhost:5204/api/dataentry", entryModel);
+            if (response.IsSuccessStatusCode)
+            {
+                statusMessage = "Data submitted successfully!";
+                entryModel = new(); // reset form
+            }
+            else
+            {
+                statusMessage = "Failed to submit data.";
+            }
+        }
+        catch (Exception ex)
+        {
+            statusMessage = $"Error: {ex.Message}";
+        }
+    }
+
+    public class EntryModel
+    {
+        public string FieldLocation { get; set; }
+        public string SoilType { get; set; }
+        public string CropName { get; set; }
+        public string CropVariety { get; set; }
+        public string SoilMoisture { get; set; }
+        public string SoilpH { get; set; }
+        public string SoilOrganicMatter { get; set; }
+    }
+}
