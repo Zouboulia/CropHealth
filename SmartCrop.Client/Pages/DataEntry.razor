@@ -1,4 +1,5 @@
 ﻿@page "/dataentry"
+@using System.ComponentModel.DataAnnotations
 @inject HttpClient Http
 @rendermode InteractiveWebAssembly
 
@@ -11,36 +12,43 @@
     <div>
         <label>Field Location:</label>
         <InputText @bind-Value="entryModel.FieldLocation" class="form-control" placeholder="please enter a city" />
+        <ValidationMessage For="@(() => entryModel.FieldLocation)" />
     </div>
 
     <div>
         <label>Soil Type:</label>
-        <InputText @bind-Value="entryModel.SoilType" class="form-control" placeholder="please enter soil type: chalky, clay, loamy, peaty, sandy, silty"/>
+        <InputText @bind-Value="entryModel.SoilType" class="form-control" placeholder="please enter soil type: chalky, clay, loamy, peaty, sandy, silty" />
+        <ValidationMessage For="@(() => entryModel.SoilType)" />
     </div>
 
     <div>
         <label>Crop Name:</label>
-        <InputText @bind-Value="entryModel.CropName" class="form-control" placeholder="please enter crop name such as Crop A, crop B, crop  etc.."/>
+        <InputText @bind-Value="entryModel.CropName" class="form-control" placeholder="please enter crop name such as Crop A, crop B, crop etc.." />
+        <ValidationMessage For="@(() => entryModel.CropName)" />
     </div>
 
     <div>
         <label>Crop Variety:</label>
-        <InputText @bind-Value="entryModel.CropVariety" class="form-control" placeholder="please enter crop variety such as cerials, vegetables etc "/>
+        <InputText @bind-Value="entryModel.CropVariety" class="form-control" placeholder="please enter crop variety such as cereals, vegetables etc" />
+        <ValidationMessage For="@(() => entryModel.CropVariety)" />
     </div>
 
     <div>
         <label>Soil Moisture:</label>
-        <InputText @bind-Value="entryModel.SoilMoisture" class="form-control" placeholder=" Normal soil moisture levels generally range from 20% to 60% for most crops"/>
+        <InputText @bind-Value="entryModel.SoilMoisture" class="form-control" placeholder="Normal soil moisture levels generally range from 20% to 60% for most crops" />
+        <ValidationMessage For="@(() => entryModel.SoilMoisture)" />
     </div>
 
     <div>
         <label>Soil pH:</label>
         <InputText @bind-Value="entryModel.SoilpH" class="form-control" placeholder="Most soils have pH values between 3.5 and 10" />
+        <ValidationMessage For="@(() => entryModel.SoilpH)" />
     </div>
 
     <div>
         <label>Soil Organic Matter:</label>
         <InputText @bind-Value="entryModel.SoilOrganicMatter" class="form-control" placeholder="The concentration of SOM in soils generally ranges from 1% to 6%" />
+        <ValidationMessage For="@(() => entryModel.SoilOrganicMatter)" />
     </div>
 
     <button type="submit">Submit</button>
@@ -78,12 +86,25 @@
 
     public class EntryModel
     {
+        [Required(ErrorMessage = "Field Location is required.")]
         public string FieldLocation { get; set; }
+
+        [Required(ErrorMessage = "Soil Type is required.")]
         public string SoilType { get; set; }
+
+        [Required(ErrorMessage = "Crop Name is required.")]
         public string CropName { get; set; }
+
+        [Required(ErrorMessage = "Crop Variety is required.")]
         public string CropVariety { get; set; }
+
+        [Required(ErrorMessage = "Soil Moisture is required.")]
         public string SoilMoisture { get; set; }
+
+        [Required(ErrorMessage = "Soil pH is required.")]
         public string SoilpH { get; set; }
+
+        [Required(ErrorMessage = "Soil Organic Matter is required.")]
         public string SoilOrganicMatter { get; set; }
     }
 }
