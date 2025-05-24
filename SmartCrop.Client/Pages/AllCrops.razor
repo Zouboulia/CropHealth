@@ -1,0 +1,82 @@
+@page "/allcrops"
+@inject HttpClient Http
+    @rendermode InteractiveWebAssembly
+
+    <h3>All Crops in the Database</h3>
+
+    @if (crops == null)
+{
+    <p>Loading crops...</p>
+}
+else if (crops.Count == 0)
+{
+    <p>No crops available.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+        <th>Crop Name</th>
+        <th>Variety</th>
+        <th>Field Location</th>
+        <th>Soil pH</th>
+        <th>Soil Moisture</th>
+        <th>Organic Matter (%)</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var crop in crops)
+    {
+        <tr>
+            <td>@crop.Name</td>
+            <td>@crop.Variety</td>
+            <td>@crop.FieldLocation</td>
+            <td>@crop.SoilpH</td>
+            <td>@crop.SoilMoisture</td>
+            <td>@crop.SoilOrganicMatter</td>
+            </tr>
+    }
+    </tbody>
+        </table>
+}
+
+@code {
+private List<CropDisplayModel> crops;
+
+protected override async Task OnInitializedAsync()
+{
+    try
+    {
+        crops = await Http.GetFromJsonAsync<List<CropDisplayModel>>("http://localhost:5204/api/crops");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Error loading crops: " + ex.Message);
+        crops = new();
+    }
+}
+
+public class CropDisplayModel
+{
+    public string Name { get; set; }
+    public string Variety { get; set; }
+    public string FieldLocation { get; set; }
+    public string SoilType { get; set; }
+    public string SoilMoisture { get; set; }
+    public string SoilpH { get; set; }
+    public string SoilOrganicMatter { get; set; }
+}
+
+public class Field
+{
+    public string Location { get; set; }
+}
+
+public class SoilData
+{
+    public string SoilpH { get; set; }
+    public string SoilMoisture { get; set; }
+    public string SoilOrganicMatter { get; set; }
+}
+}
