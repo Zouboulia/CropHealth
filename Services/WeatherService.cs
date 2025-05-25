@@ -24,6 +24,10 @@ namespace SmartCrop.Services
             try
             {
                 string url = $"https://api.openweathermap.org/data/2.5/weather?q={cityName}&appid={ApiKey}&units=metric";
+                
+                // Simulating a timeout error by setting the timeout to 1 millisecond for testing
+                _httpClient.Timeout = TimeSpan.FromMilliseconds(1);
+                
                 var response = await _httpClient.GetAsync(url);
 
                 if (!response.IsSuccessStatusCode)
