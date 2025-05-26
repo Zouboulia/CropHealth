@@ -1,7 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 using SmartCrop.Data;
 using SmartCrop.Shared.Models;
-using SmartCrop.Services;
-using Microsoft.EntityFrameworkCore;
+
+namespace SmartCrop.Services;
 
 public class MonitoringService
 {
