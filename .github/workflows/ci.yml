@@ -48,16 +48,16 @@ jobs:
     - name: Set working directory to SmartCrop
       run: cd SmartCrop
     
-    # Restore dependencies on Ubuntu
-    - name: Restore dependencies
-      run: dotnet restore SmartCrop.sln 
+    # Restore dependencies for the entire solution 
+    - name: Restore dependencies for SmartCrop.sln
+      run: dotnet restore SmartCrop.sln --verbosity detailed # Using detailed verbosity to troubleshoot why this is failing (in case it fails again) 
 
-    # Build project on Ubuntu
-    - name: Build project
+    # Build project 
+    - name: Build project using SmartCrop.sln
       run: dotnet build SmartCrop.sln --configuration Release
 
-    # Run tests on Ubuntu
-    - name: Run tests
+    # Run tests
+    - name: Run tests for SmartCrop
       run: dotnet test SmartCrop.sln --configuration Release
 
  
