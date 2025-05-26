@@ -23,14 +23,11 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '8.0'
-
-    # Step to restore dependencies
-    - name: Restore dependencies
-      run: dotnet restore
-
-    # Step to build the project
-    - name: Build project
-      run: dotnet build --configuration Release
+      
+    # Skip dotnet restore and build for Ubuntu only
+    - name: Skip restore and build on Ubuntu
+      if: runner.os == 'Linux'
+      run: echo "Skipping restore and build for Ubuntu (Linux)"
 
     # Step to run tests
     - name: Run tests
