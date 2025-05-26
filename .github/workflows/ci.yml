@@ -47,10 +47,6 @@ jobs:
     # Set working directory to 'SmartCrop' 
     - name: Set working directory to SmartCrop
       run: cd SmartCrop
-    
-    # Restore dependencies for the entire solution 
-    - name: Restore dependencies using SmartCrop.sln
-      run: dotnet restore SmartCrop.sln --verbosity detailed # Using detailed verbosity to troubleshoot why this is failing (in case it fails again) 
 
     # Build project 
     - name: Build project using SmartCrop.sln
