@@ -1,8 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 
+
 namespace SmartCrop.Shared.Models
 {
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
     public class PercentageStringAttribute : ValidationAttribute
     {
         public override bool IsValid(object value)

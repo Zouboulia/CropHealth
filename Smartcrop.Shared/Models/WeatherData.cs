@@ -14,14 +14,4 @@ public class WeatherData
     public double UVi { get; set; } // UV index
     public double Clouds { get; set; } // Cloud cover in percentage
     
-    
-    //get weather data from OpenWeatherapp API
-    
-    // public string GetWeatherData()
-    // {
-    //     // This method will call the OpenWeatherMap API and return the weather data
-    //     // Will use HttpClient to make the API call and deserialize the response
-    //     // into a WeatherData object
-    //     return "Weather data fetched from OpenWeatherMap API";
-    // }
 }
