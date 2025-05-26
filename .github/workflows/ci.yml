@@ -30,3 +30,22 @@ jobs:
 
     - name: Run tests
       run: dotnet test --configuration Release
+      
+  # Job for building and testing on Windows
+  build_ubuntu:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up .NET SDK
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '8.0'
+
+    # Set working directory to 'SmartCrop' 
+    - name: Set working directory to SmartCrop
+      run: cd SmartCrop
+
+ 
