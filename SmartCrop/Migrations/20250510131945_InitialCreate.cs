@@ -9,14 +9,35 @@ namespace SmartCrop.Migrations
     public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
+        ///
+        /// Defining a constant for INTEGER type to avoid repetition, as per linter's suggestion
+        private const string IntegerType = "INTEGER";
+        /// Defining a constant for the autoincrement annotation to avoid repetition
+        private const string AutoincrementAnnotation = "Sqlite:Autoincrement";
+        
+        // Defining table names as constants to avoid repetition
+        private const string FieldsTableName = "Fields";
+        private const string FarmersTableName = "Farmers";
+        private const string CropsTableName = "Crops";
+        private const string SoilDataTableName = "SoilData";
+        private const string HealthStatusesTableName = "HealthStatuses";
+        private const string RecommendationsTableName = "Recommendations";
+        private const string WeatherDataTableName = "WeatherData";
+        
+        // Defining constants for some of the column names to avoid repetition
+        private const string FarmerIdColumn = "FarmerId";
+        private const string FieldIdColumn = "FieldId";
+        private const string CropIdColumn = "CropId";
+        
+        
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Farmers",
+                name: FarmersTableName,
                 columns: table => new
                 {
-                    FarmerId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    FarmerId = table.Column<int>(type: IntegerType, nullable: false)
+                        .Annotation(AutoincrementAnnotation, true),
                     Name = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -25,14 +46,14 @@ namespace SmartCrop.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Fields",
+                name: FieldsTableName,
                 columns: table => new
                 {
-                    FieldId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    FieldId = table.Column<int>(type: IntegerType, nullable: false)
+                        .Annotation(AutoincrementAnnotation, true),
                     Location = table.Column<string>(type: "TEXT", nullable: false),
                     SoilType = table.Column<string>(type: "TEXT", nullable: false),
-                    FarmerId = table.Column<int>(type: "INTEGER", nullable: false)
+                    FarmerId = table.Column<int>(type: IntegerType, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -40,20 +61,20 @@ namespace SmartCrop.Migrations
                     table.ForeignKey(
                         name: "FK_Fields_Farmers_FarmerId",
                         column: x => x.FarmerId,
-                        principalTable: "Farmers",
-                        principalColumn: "FarmerId",
+                        principalTable: FarmersTableName,
+                        principalColumn: FarmerIdColumn,
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Crops",
+                name: CropsTableName,
                 columns: table => new
                 {
-                    CropId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    CropId = table.Column<int>(type: IntegerType, nullable: false)
+                        .Annotation(AutoincrementAnnotation, true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Variety = table.Column<string>(type: "TEXT", nullable: false),
-                    FieldId = table.Column<int>(type: "INTEGER", nullable: false)
+                    FieldId = table.Column<int>(type: IntegerType, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -61,18 +82,18 @@ namespace SmartCrop.Migrations
                     table.ForeignKey(
                         name: "FK_Crops_Fields_FieldId",
                         column: x => x.FieldId,
-                        principalTable: "Fields",
-                        principalColumn: "FieldId",
+                        principalTable: FieldsTableName,
+                        principalColumn: FieldIdColumn,
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SoilData",
+                name: SoilDataTableName,
                 columns: table => new
                 {
-                    SoilDataId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    FieldId = table.Column<int>(type: "INTEGER", nullable: false),
+                    SoilDataId = table.Column<int>(type: IntegerType, nullable: false)
+                        .Annotation(AutoincrementAnnotation, true),
+                    FieldId = table.Column<int>(type: IntegerType, nullable: false),
                     SoilType = table.Column<string>(type: "TEXT", nullable: false),
                     SoilMoisture = table.Column<string>(type: "TEXT", nullable: false),
                     SoilpH = table.Column<string>(type: "TEXT", nullable: false),
@@ -84,18 +105,18 @@ namespace SmartCrop.Migrations
                     table.ForeignKey(
                         name: "FK_SoilData_Fields_FieldId",
                         column: x => x.FieldId,
-                        principalTable: "Fields",
-                        principalColumn: "FieldId",
+                        principalTable: FieldsTableName,
+                        principalColumn: FieldIdColumn,
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "HealthStatuses",
+                name: HealthStatusesTableName,
                 columns: table => new
                 {
-                    HealthStatusId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    CropId = table.Column<int>(type: "INTEGER", nullable: false),
+                    HealthStatusId = table.Column<int>(type: IntegerType, nullable: false)
+                        .Annotation(AutoincrementAnnotation, true),
+                    CropId = table.Column<int>(type: IntegerType, nullable: false),
                     Status = table.Column<string>(type: "TEXT", nullable: false),
                     DateChecked = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Notes = table.Column<string>(type: "TEXT", nullable: false)
@@ -106,18 +127,18 @@ namespace SmartCrop.Migrations
                     table.ForeignKey(
                         name: "FK_HealthStatuses_Crops_CropId",
                         column: x => x.CropId,
-                        principalTable: "Crops",
-                        principalColumn: "CropId",
+                        principalTable: CropsTableName,
+                        principalColumn: CropIdColumn,
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Recommendations",
+                name: RecommendationsTableName,
                 columns: table => new
                 {
-                    RecommendationId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    CropId = table.Column<int>(type: "INTEGER", nullable: false),
+                    RecommendationId = table.Column<int>(type: IntegerType, nullable: false)
+                        .Annotation(AutoincrementAnnotation, true),
+                    CropId = table.Column<int>(type: IntegerType, nullable: false),
                     RecommendationText = table.Column<string>(type: "TEXT", nullable: false),
                     DateIssued = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Priority = table.Column<string>(type: "TEXT", nullable: false)
@@ -128,18 +149,18 @@ namespace SmartCrop.Migrations
                     table.ForeignKey(
                         name: "FK_Recommendations_Crops_CropId",
                         column: x => x.CropId,
-                        principalTable: "Crops",
-                        principalColumn: "CropId",
+                        principalTable: CropsTableName,
+                        principalColumn: CropIdColumn,
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "WeatherData",
+                name: WeatherDataTableName,
                 columns: table => new
                 {
-                    WeatherDataId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    CropId = table.Column<int>(type: "INTEGER", nullable: false),
+                    WeatherDataId = table.Column<int>(type: IntegerType, nullable: false)
+                        .Annotation(AutoincrementAnnotation, true),
+                    CropId = table.Column<int>(type: IntegerType, nullable: false),
                     Date = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Temperature = table.Column<double>(type: "REAL", nullable: false),
                     Humidity = table.Column<double>(type: "REAL", nullable: false),
@@ -153,65 +174,65 @@ namespace SmartCrop.Migrations
                     table.ForeignKey(
                         name: "FK_WeatherData_Crops_CropId",
                         column: x => x.CropId,
-                        principalTable: "Crops",
-                        principalColumn: "CropId",
+                        principalTable: CropsTableName,
+                        principalColumn: CropIdColumn,
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Crops_FieldId",
-                table: "Crops",
-                column: "FieldId");
+                table: CropsTableName,
+                column: FieldIdColumn);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Fields_FarmerId",
-                table: "Fields",
-                column: "FarmerId");
+                table: FieldsTableName,
+                column: FarmerIdColumn);
 
             migrationBuilder.CreateIndex(
                 name: "IX_HealthStatuses_CropId",
-                table: "HealthStatuses",
-                column: "CropId");
+                table: HealthStatusesTableName,
+                column: CropIdColumn);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Recommendations_CropId",
-                table: "Recommendations",
-                column: "CropId");
+                table: RecommendationsTableName,
+                column: CropIdColumn);
 
             migrationBuilder.CreateIndex(
                 name: "IX_SoilData_FieldId",
-                table: "SoilData",
-                column: "FieldId");
+                table: SoilDataTableName,
+                column: FieldIdColumn);
 
             migrationBuilder.CreateIndex(
                 name: "IX_WeatherData_CropId",
-                table: "WeatherData",
-                column: "CropId");
+                table: WeatherDataTableName,
+                column: CropIdColumn);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "HealthStatuses");
+                name: HealthStatusesTableName);
 
             migrationBuilder.DropTable(
-                name: "Recommendations");
+                name: RecommendationsTableName);
 
             migrationBuilder.DropTable(
-                name: "SoilData");
+                name: SoilDataTableName);
 
             migrationBuilder.DropTable(
-                name: "WeatherData");
+                name: WeatherDataTableName);
 
             migrationBuilder.DropTable(
-                name: "Crops");
+                name: CropsTableName);
 
             migrationBuilder.DropTable(
-                name: "Fields");
+                name: FieldsTableName);
 
             migrationBuilder.DropTable(
-                name: "Farmers");
+                name: FarmersTableName);
         }
     }
 }
