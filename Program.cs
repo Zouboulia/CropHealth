@@ -45,4 +45,4 @@ app.MapRazorComponents<App>()
     .AddInteractiveWebAssemblyRenderMode()
     .AddAdditionalAssemblies(typeof(SmartCrop.Client._Imports).Assembly);
 
-app.Run();
+await app.RunAsync();

@@ -32,7 +32,7 @@ namespace SmartCrop.Services
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    _logger.LogWarning($"Weather API call failed: {response.StatusCode}");
+                    _logger.LogWarning("Weather API call failed: {StatusCode}", response.StatusCode);
                     return null;
                 }
 
