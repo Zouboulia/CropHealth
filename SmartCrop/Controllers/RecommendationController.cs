@@ -15,12 +15,17 @@ namespace SmartCrop.Controllers
             _monitoringService = monitoringService;
         }
 
-        [HttpGet("crop/{cropId}")]
-        public async Task<ActionResult<List<Recommendation>>> GetRecommendations(int cropId, [FromQuery] string city)
+        [HttpGet("crop")]
+        public async Task<ActionResult<List<Recommendation>>> GetRecommendations([FromQuery] string city)
         {
-            var recommendations = await _monitoringService.GenerateRecommendationsAsync(cropId, city);
+            if (string.IsNullOrWhiteSpace(city))
+            {
+                return BadRequest("City is required.");
+            }
+
+            var recommendations = await _monitoringService.GenerateRecommendationsAsync(city);
+
             return Ok(recommendations);
         }
     }
 }
-

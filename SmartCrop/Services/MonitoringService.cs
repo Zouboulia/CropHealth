@@ -1,7 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 using SmartCrop.Data;
 using SmartCrop.Shared.Models;
-using SmartCrop.Services;
-using Microsoft.EntityFrameworkCore;
+
+namespace SmartCrop.Services;
 
 public class MonitoringService
 {
@@ -14,92 +15,87 @@ public class MonitoringService
         _weatherService = weatherService;
     }
 
-    public async Task<List<Recommendation>> GenerateRecommendationsAsync(int cropId, string cityName)
+    public async Task<List<Recommendation>> GenerateRecommendationsAsync(string city)
     {
-        var crop = await _dbContext.Crops
-            .Include(c => c.Field)
-            .FirstOrDefaultAsync(c => c.CropId == cropId);
-
-        if (crop == null)
-            return new List<Recommendation>();
-
-        var soilData = await _dbContext.SoilData
-            .FirstOrDefaultAsync(s => s.FieldId == crop.FieldId);
-
-        var weather = await _weatherService.GetWeatherAsync(cityName);
-        if (weather == null)
-            return new List<Recommendation>();
-
         var recommendations = new List<Recommendation>();
 
-        // Weather-based recommendation
-        if (weather.Rain < 10)
-        {
-            recommendations.Add(new Recommendation
-            {
-                CropId = cropId,
-                RecommendationText = "Low rainfall detected. Consider irrigation.",
-                DateIssued = DateTime.Now,
-                Priority = "High"
-            });
-        }
+        // Get all fields where the location matches the entered city
+        var fields = await _dbContext.Fields
+            .Where(f => f.Location.ToLower() == city.ToLower())
+            .ToListAsync();
 
-        // Soil pH recommendation
-        if (double.TryParse(soilData?.SoilpH, out double pH))
-        {
-            if (pH < 5.5)
-            {
-                recommendations.Add(new Recommendation
-                {
-                    CropId = cropId,
-                    RecommendationText = "Soil is too acidic. Apply lime to raise pH.",
-                    DateIssued = DateTime.Now,
-                    Priority = "Medium"
-                });
-            }
-            else if (pH > 7.5)
-            {
-                recommendations.Add(new Recommendation
-                {
-                    CropId = cropId,
-                    RecommendationText = "Soil is too alkaline. Consider adding sulfur or acid-forming fertilizers.",
-                    DateIssued = DateTime.Now,
-                    Priority = "Medium"
-                });
-            }
-        }
+        if (fields.Count == 0)
+            return recommendations;
 
-        // Soil Organic Matter (SOM) recommendation
-        if (double.TryParse(soilData?.SoilOrganicMatter, out double som))
-        {
-            if (som < 2.0)
-            {
-                recommendations.Add(new Recommendation
-                {
-                    CropId = cropId,
-                    RecommendationText = "Low organic matter detected. Add compost or green manure to improve soil health.",
-                    DateIssued = DateTime.Now,
-                    Priority = "Low"
-                });
-            }
-            else if (som > 6.0)
-            {
-                recommendations.Add(new Recommendation
-                {
-                    CropId = cropId,
-                    RecommendationText = "Organic matter is very high. Monitor for potential nutrient imbalances.",
-                    DateIssued = DateTime.Now,
-                    Priority = "Low"
-                });
-            }
-        }
+        // Fetch weather data for the city
+        var weather = await _weatherService.GetWeatherAsync(city);
+        if (weather == null)
+            return recommendations;
 
-        // Add weather summary
-        string summary = $"Weather in {cityName}: Temp {weather.Temperature}°C, Rain {weather.Rain}mm, Humidity {weather.Humidity}%, Clouds {weather.Clouds}%";
-
-        foreach (var rec in recommendations)
+        foreach (var field in fields)
         {
-            rec.WeatherSummary = summary;
+            var crops = await _dbContext.Crops
+                .Where(c => c.FieldId == field.FieldId)
+                .ToListAsync();
+
+            var soil = await _dbContext.SoilData
+                .FirstOrDefaultAsync(s => s.FieldId == field.FieldId);
+
+            foreach (var crop in crops)
+            {
+                // Weather-based recommendation
+                if (weather.Rain < 10)
+                {
+                    recommendations.Add(new Recommendation
+                    {
+                        CropId = crop.CropId,
+                        RecommendationText = $"Low rainfall in {city}. Consider irrigating {crop.Name}.",
+                        DateIssued = DateTime.Now,
+                        Priority = "High",
+                        WeatherSummary = $"Rain: {weather.Rain} mm, Temp: {weather.Temperature} °C"
+                    });
+                }
+
+                // Soil pH recommendation
+                if (double.TryParse(soil?.SoilpH, out double pH))
+                {
+                    if (pH < 5.5)
+                    {
+                        recommendations.Add(new Recommendation
+                        {
+                            CropId = crop.CropId,
+                            RecommendationText = $"{crop.Name}: Soil is too acidic. Apply lime.",
+                            DateIssued = DateTime.Now,
+                            Priority = "Medium",
+                            WeatherSummary = $"pH: {pH}"
+                        });
+                    }
+                    else if (pH > 7.5)
+                    {
+                        recommendations.Add(new Recommendation
+                        {
+                            CropId = crop.CropId,
+                            RecommendationText = $"{crop.Name}: Soil is too alkaline. Add sulfur.",
+                            DateIssued = DateTime.Now,
+                            Priority = "Medium",
+                            WeatherSummary = $"pH: {pH}"
+                        });
+                    }
+                }
+
+                // Soil Organic Matter
+                if (double.TryParse(soil?.SoilOrganicMatter, out double som) && som < 2.0)
+                {
+                    recommendations.Add(new Recommendation
+                    {
+                        CropId = crop.CropId,
+                        RecommendationText = $"{crop.Name}: Low organic matter. Add compost.",
+                        DateIssued = DateTime.Now,
+                        Priority = "Low",
+                        WeatherSummary = $"SOM: {som}"
+                    });
+                }
+            }
         }
 
         return recommendations;
