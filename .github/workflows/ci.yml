@@ -9,30 +9,6 @@ on:
       - main  # pull requests to the main branch
 
 jobs:
-  # Job for building and testing on Ubuntu
-  build_ubuntu:
-    runs-on: ubuntu-latest 
-
-    steps:
-    # Step to checkout the code
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    # Step to set up the .NET SDK
-    - name: Set up .NET SDK
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '8.0'
-      
-    # Skip dotnet restore and build for Ubuntu only
-    - name: Skip restore and build on Ubuntu
-      if: runner.os == 'Linux'
-      run: echo "Skipping restore and build for Ubuntu (Linux)"
-
-    # Step to run tests
-    - name: Run tests
-      run: dotnet test --configuration Release
-
   # Job for building and testing on Windows
   build_windows:
     runs-on: windows-latest  
