@@ -31,9 +31,9 @@ jobs:
     - name: Run tests
       run: dotnet test --configuration Release
       
-  # Job for building and testing on Windows
-  build_ubuntu:
-    runs-on: ubuntu-latest
+  # Job for building and testing on macOS
+  build_macos:
+    runs-on: macos-latest
 
     steps:
     - name: Checkout code
@@ -44,16 +44,14 @@ jobs:
       with:
         dotnet-version: '8.0'
 
-    # Set working directory to 'SmartCrop' 
-    - name: Set working directory to SmartCrop
-      run: cd SmartCrop
+    - name: Restore dependencies
+      run: dotnet restore
 
-    # Build project 
-    - name: Build project using SmartCrop.sln
-      run: dotnet build SmartCrop.sln --configuration Release
+    - name: Build project
+      run: dotnet build --configuration Release
 
-    # Run tests
     - name: Run tests
-      run: dotnet test SmartCrop.sln --configuration Release
+      run: dotnet test --configuration Release
 
+ 
  
