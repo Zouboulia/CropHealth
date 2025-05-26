@@ -22,7 +22,7 @@ jobs:
     - name: Set up .NET SDK
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '9.0' 
+        dotnet-version: '8.0'
 
     # Step to restore dependencies
     - name: Restore dependencies
@@ -47,7 +47,7 @@ jobs:
     - name: Set up .NET SDK
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '9.0' 
+        dotnet-version: '8.0'
 
     - name: Restore dependencies
       run: dotnet restore
