@@ -47,5 +47,17 @@ jobs:
     # Set working directory to 'SmartCrop' 
     - name: Set working directory to SmartCrop
       run: cd SmartCrop
+    
+    # Restore dependencies on Ubuntu
+    - name: Restore dependencies
+      run: dotnet restore SmartCrop.sln 
+
+    # Build project on Ubuntu
+    - name: Build project
+      run: dotnet build SmartCrop.sln --configuration Release
+
+    # Run tests on Ubuntu
+    - name: Run tests
+      run: dotnet test SmartCrop.sln --configuration Release
 
  
