@@ -26,6 +26,14 @@ jobs:
 
       - name: Restore NuGet packages
         run: nuget restore
+      - name: List build output files
+        run: |
+            echo "Contents of Smartcrop.Shared directory:"
+            dir D:/a/CropHealth/CropHealth/Smartcrop.Shared/bin/Release/net8.0/
+            echo "Contents of SmartCrop.Client directory:"
+            dir D:/a/CropHealth/CropHealth/SmartCrop.Client/bin/Release/net8.0/
+            echo "Contents of SmartCrop directory:"
+            dir D:/a/CropHealth/CropHealth/SmartCrop/bin/Release/net8.0/
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
