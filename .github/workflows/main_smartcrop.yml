@@ -31,7 +31,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ASP-app
-          path: '$(Build.ArtifactStagingDirectory)/**'
+          path: |
+            'D:/a/CropHealth/CropHealth/Smartcrop.Shared/bin/Release/net8.0/Smartcrop.Shared.dll'
+            'D:/a/CropHealth/CropHealth/SmartCrop.Client/bin/Release/net8.0/SmartCrop.Client.dll'
+            'D:/a/CropHealth/CropHealth/SmartCrop.Client/bin/Release/net8.0/wwwroot/**'
+            'D:/a/CropHealth/CropHealth/SmartCrop/bin/Release/net8.0/SmartCrop.dll'
 
   deploy:
     runs-on: windows-latest
@@ -62,5 +66,5 @@ jobs:
         with:
           app-name: 'SmartCrop'
           slot-name: 'Production'
-          package: .
+          package: ${{ github.workspace }}/ASP-app
           
