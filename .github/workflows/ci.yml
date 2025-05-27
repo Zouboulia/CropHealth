@@ -21,7 +21,11 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '8.0'
-
+    - name: Set API key from secrets
+        env:
+          OPENWEATHERMAP_API_KEY: ${{ secrets.OPENWEATHERMAP_API_KEY }}
+        run: |
+          echo "Retrieving OpenWeatherMap API Key from Github secrets"
     - name: Restore dependencies
       run: dotnet restore
 
