@@ -26,6 +26,7 @@ jobs:
           OPENWEATHERMAP_API_KEY: ${{ secrets.OPENWEATHERMAP_API_KEY }}
         run: |
           echo "Retrieving OpenWeatherMap API Key from Github secrets"
+          curl -X GET "https://api.openweathermap.org/data/2.5/weather?q=London&appid=$OPENWEATHERMAP_API_KEY"
     - name: Restore dependencies
       run: dotnet restore
 
