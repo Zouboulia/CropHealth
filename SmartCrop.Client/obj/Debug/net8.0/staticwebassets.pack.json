@@ -1,0 +1,37 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/SmartCrop.Client/bin/Debug/net8.0/wwwroot/_framework/blazor.webassembly.js",
+      "PackagePath": "staticwebassets/_framework/blazor.webassembly.js"
+    },
+    {
+      "Id": "/Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/SmartCrop.Client/obj/Debug/net8.0/compressed/cl7wqpp4mu.gz",
+      "PackagePath": "staticwebassets/_framework/blazor.webassembly.js.gz"
+    },
+    {
+      "Id": "/Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/SmartCrop.Client/wwwroot/appsettings.Development.json",
+      "PackagePath": "staticwebassets/appsettings.Development.json"
+    },
+    {
+      "Id": "/Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/SmartCrop.Client/wwwroot/appsettings.json",
+      "PackagePath": "staticwebassets/appsettings.json"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.SmartCrop.Client.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.SmartCrop.Client.props",
+      "PackagePath": "build\\SmartCrop.Client.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.SmartCrop.Client.props",
+      "PackagePath": "buildMultiTargeting\\SmartCrop.Client.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.SmartCrop.Client.props",
+      "PackagePath": "buildTransitive\\SmartCrop.Client.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,0 +1,39 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = SmartCrop.Client
+build_property.RootNamespace = SmartCrop.Client
+build_property.ProjectDir = /Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/SmartCrop.Client/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = false
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/SmartCrop.Client
+build_property._RazorSourceGeneratorDebug = 
+
+[/Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/SmartCrop.Client/Pages/AllCrops.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWxsQ3JvcHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/SmartCrop.Client/Pages/DataEntry.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGF0YUVudHJ5LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/SmartCrop.Client/Pages/Recommendations.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUmVjb21tZW5kYXRpb25zLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/SmartCrop.Client/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 

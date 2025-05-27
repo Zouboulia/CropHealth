@@ -1,0 +1,12 @@
+/Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/Smartcrop.Shared/bin/Debug/net8.0/Smartcrop.Shared.deps.json
+/Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/Smartcrop.Shared/bin/Debug/net8.0/Smartcrop.Shared.dll
+/Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/Smartcrop.Shared/bin/Debug/net8.0/Smartcrop.Shared.pdb
+/Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/Smartcrop.Shared/obj/Debug/net8.0/Smartcrop.Shared.GeneratedMSBuildEditorConfig.editorconfig
+/Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/Smartcrop.Shared/obj/Debug/net8.0/Smartcrop.Shared.AssemblyInfoInputs.cache
+/Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/Smartcrop.Shared/obj/Debug/net8.0/Smartcrop.Shared.AssemblyInfo.cs
+/Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/Smartcrop.Shared/obj/Debug/net8.0/Smartcrop.Shared.csproj.CoreCompileInputs.cache
+/Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/Smartcrop.Shared/obj/Debug/net8.0/Smartcrop.Shared.dll
+/Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/Smartcrop.Shared/obj/Debug/net8.0/refint/Smartcrop.Shared.dll
+/Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/Smartcrop.Shared/obj/Debug/net8.0/Smartcrop.Shared.pdb
+/Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/Smartcrop.Shared/obj/Debug/net8.0/ref/Smartcrop.Shared.dll
+/Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/Smartcrop.Shared/obj/Debug/net8.0/SmartCrop.Shared.sourcelink.json
