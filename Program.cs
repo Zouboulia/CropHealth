@@ -2,8 +2,11 @@ using Microsoft.EntityFrameworkCore;
 using SmartCrop.Components;
 using SmartCrop.Data;
 using SmartCrop.Services;
+using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
+
+Env.Load(); // Load environment variables from .env file
 
 // Add services to the container.
 builder.Services.AddRazorComponents()

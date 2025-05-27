@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/SmartCrop/obj/Debug/net8.0/scopedcss/projectbundle/SmartCrop.bundle.scp.css",
+      "PackagePath": "staticwebassets/SmartCrop.bundle.scp.css"
+    },
+    {
+      "Id": "/Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/SmartCrop/wwwroot/app.css",
+      "PackagePath": "staticwebassets/app.css"
+    },
+    {
+      "Id": "/Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/SmartCrop/wwwroot/bootstrap/bootstrap.min.css",
+      "PackagePath": "staticwebassets/bootstrap/bootstrap.min.css"
+    },
+    {
+      "Id": "/Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/SmartCrop/wwwroot/bootstrap/bootstrap.min.css.map",
+      "PackagePath": "staticwebassets/bootstrap/bootstrap.min.css.map"
+    },
+    {
+      "Id": "/Users/zouboulia/Library/CloudStorage/OneDrive-Personal/Desktop/ATU-Y4-SW Dev/Project/SmartCrop/SmartCrop/wwwroot/favicon.png",
+      "PackagePath": "staticwebassets/favicon.png"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.SmartCrop.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.SmartCrop.props",
+      "PackagePath": "build\\SmartCrop.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.SmartCrop.props",
+      "PackagePath": "buildMultiTargeting\\SmartCrop.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.SmartCrop.props",
+      "PackagePath": "buildTransitive\\SmartCrop.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
