@@ -11,24 +11,28 @@ namespace SmartCrop.Services
     {
         private readonly HttpClient _httpClient;
         private readonly ILogger<WeatherService> _logger;
-        private const string ApiKey = "ed9672b6feb8e2f4609252ba65065547";
+        private readonly string _apiKey;
 
+        // Constructor to inject HttpClient and ILogger
         public WeatherService(HttpClient httpClient, ILogger<WeatherService> logger)
         {
             _httpClient = httpClient;
             _logger = logger;
+            _apiKey = Environment.GetEnvironmentVariable("OPENWEATHERMAP_API_KEY");
         }
 
+        
         public async Task<WeatherData?> GetWeatherAsync(string cityName)
         {
             try
             {
-                string url = $"https://api.openweathermap.org/data/2.5/weather?q={cityName}&appid={ApiKey}&units=metric";
+                string url = $"https://api.openweathermap.org/data/2.5/weather?q={cityName}&appid={_apiKey}&units=metric";
                 
                 // Simulating a timeout error by setting the timeout to 1 millisecond for testing
                 //_httpClient.Timeout = TimeSpan.FromMilliseconds(1);
                 
-                var response = await _httpClient.GetAsync(url);
+                // Make the API call to OpenWeatherMap
+                var response = await _httpClient.GetAsync(url); 
 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -39,6 +43,9 @@ namespace SmartCrop.Services
                 var json = await response.Content.ReadAsStringAsync();
                 using var doc = JsonDocument.Parse(json);
                 var root = doc.RootElement;
+                
+                // Log the JSON response for debugging
+                _logger.LogInformation("Weather data received: {json}", json);
 
                 var weatherData = new WeatherData
                 {
