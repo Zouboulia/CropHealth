@@ -13,7 +13,7 @@ jobs:
   build:
     runs-on: windows-latest
     permissions:
-      contents: read #This is required for actions/checkout
+      contents: read # This is required for actions/checkout
 
     steps:
       - uses: actions/checkout@v4
@@ -26,6 +26,21 @@ jobs:
 
       - name: Restore NuGet packages
         run: nuget restore
+
+      - name: Build and Publish SmartCrop Solution
+        run: |
+          # Build and publish the solution to ensure the output directories exist
+          dotnet build SmartCrop.sln -c Release
+          dotnet publish SmartCrop.sln -c Release -o D:/a/CropHealth/SmartCrop/Smartcrop.Shared/bin/Release/net8.0/
+          dotnet publish SmartCrop.sln -c Release -o D:/a/CropHealth/SmartCrop/SmartCrop.Client/bin/Release/net8.0/
+          dotnet publish SmartCrop.sln -c Release -o D:/a/CropHealth/SmartCrop/SmartCrop/bin/Release/net8.0/
+
+      - name: Create directories if they don't exist
+        run: |
+          # Ensure the necessary directories exist before uploading artifacts
+          mkdir -p D:/a/CropHealth/SmartCrop/Smartcrop.Shared/bin/Release/net8.0/
+          mkdir -p D:/a/CropHealth/SmartCrop/SmartCrop.Client/bin/Release/net8.0/
+          mkdir -p D:/a/CropHealth/SmartCrop/SmartCrop/bin/Release/net8.0/
 
       - name: List build output files
         run: |
@@ -45,15 +60,16 @@ jobs:
             D:/a/CropHealth/SmartCrop/SmartCrop.Client/bin/Release/net8.0/SmartCrop.Client.dll
             D:/a/CropHealth/SmartCrop/SmartCrop.Client/bin/Release/net8.0/wwwroot/**
             D:/a/CropHealth/SmartCrop/SmartCrop/bin/Release/net8.0/SmartCrop.dll
+
   deploy:
     runs-on: windows-latest
     needs: build
     environment:
-      name: 'Production'
+      name: 'Development'  # Changed to 'Development' for the dev environment
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write #This is required for requesting the JWT
-      contents: read #This is required for actions/checkout
+      id-token: write # This is required for requesting the JWT
+      contents: read # This is required for actions/checkout
 
     steps:
       - name: Download artifact from build job
@@ -72,7 +88,6 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'SmartCrop'
-          slot-name: 'Production'
+          app-name: 'SmartCrop'  # Ensure this matches your development app name
+          slot-name: 'Development'  # Changed to 'Development' for the dev slot
           package: ${{ github.workspace }}/ASP-app
-          
