@@ -38,9 +38,15 @@ jobs:
       - name: Create directories if they don't exist
         run: |
           # Ensure the necessary directories exist before uploading artifacts
-          mkdir -p D:/a/CropHealth/SmartCrop/Smartcrop.Shared/bin/Release/net8.0/
-          mkdir -p D:/a/CropHealth/SmartCrop/SmartCrop.Client/bin/Release/net8.0/
-          mkdir -p D:/a/CropHealth/SmartCrop/SmartCrop/bin/Release/net8.0/
+          if (-not (Test-Path -Path "D:/a/CropHealth/SmartCrop/Smartcrop.Shared/bin/Release/net8.0/")) {
+            New-Item -ItemType Directory -Path "D:/a/CropHealth/SmartCrop/Smartcrop.Shared/bin/Release/net8.0/"
+          }
+          if (-not (Test-Path -Path "D:/a/CropHealth/SmartCrop/SmartCrop.Client/bin/Release/net8.0/")) {
+            New-Item -ItemType Directory -Path "D:/a/CropHealth/SmartCrop/SmartCrop.Client/bin/Release/net8.0/"
+          }
+          if (-not (Test-Path -Path "D:/a/CropHealth/SmartCrop/SmartCrop/bin/Release/net8.0/")) {
+            New-Item -ItemType Directory -Path "D:/a/CropHealth/SmartCrop/SmartCrop/bin/Release/net8.0/"
+          }
 
       - name: List build output files
         run: |
