@@ -34,5 +34,5 @@ Snyk
 11. Receive recommendations
 
 
-License
-This application is currently unlicensed.
+# License
+- This application is currently unlicensed.
