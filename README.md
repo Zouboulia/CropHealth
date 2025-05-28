@@ -1,14 +1,14 @@
-Smart Crop Health Management application
+# Smart Crop Health Management application
 This system analyzes crop health data and provides smart recommendations based on real-time weather data to maintain healthy crops. 
 
-Technologies used:
-ASP.NET Core
-Entity Framework Core (SQLite)
-OpenWeatherMap API
-xUnit (unit testing)
-SonarQube Cloud (code formatting)
-CodeQL
-Snyk
+# Technologies used:
+- ASP.NET Core
+- Entity Framework Core (SQLite)
+- OpenWeatherMap API
+- xUnit (unit testing)
+- SonarQube Cloud (code formatting)
+- CodeQL
+- Snyk
 
 # Features:
 1. Add Crop data manually.
