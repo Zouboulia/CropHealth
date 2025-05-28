@@ -21,8 +21,8 @@ Snyk
 2. Open terminal at server level (SmartCrop)
 3. Build and run the application:
 
-dotnet build
-dotnet run
+- dotnet build 
+- dotnet run
 
 4. Wait for browser page to open and load
 5. From left pane menu select navigate to Data Entry
