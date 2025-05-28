@@ -92,6 +92,7 @@ jobs:
           enable-AzPSSession: false
           environment: azurecloud
           auth-type: SERVICE_PRINCIPAL 
+          allow-no-subscriptions: false
 
       - name: Azure CLI Login
         run: |
